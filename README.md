@@ -23,7 +23,7 @@ Bu doküman, Capi Help Bot'un tüm komutlarını kategorik olarak listeler.
 
 | Komut       | Açıklama                                     | Kod                | Not             |
 | ----------- | -------------------------------------------- | ------------------ | --------------- |
-| `/help`     | LibreGroupHelp Wiki bağlantısını gösterir.   | `COMMAND_HELP`     | Özel mesajlarda |
+| `/help`     | CapieGroupHelp Wiki bağlantısını gösterir.   | `COMMAND_HELP`     | Özel mesajlarda |
 | `/commands` | Bot komutlarını gösteren bir bağlantı sunar. | `COMMAND_COMMANDS` | Özel mesajlarda |
 | `/support`  | Bot desteğiyle iletişime geçer.              | `COMMAND_SUPPORT`  | Özel mesajlarda |
 
