@@ -86,4 +86,56 @@ Bu doküman, Capi Help Bot'un tüm komutlarını kategorik olarak listeler.
 
 ---
 
+---
+
+## Özellik Durumu
+
+| Durum | Özellik                                          |
+| ----- | ------------------------------------------------ |
+| ✅     | Roller ve izinler hiyerarşisi                    |
+| ❌     | Özel roller                                      |
+| ✅     | Moderasyon komutları                             |
+| ❌     | Kanal kullanıcıları için moderasyon desteği      |
+| ❌     | Anonim yöneticiler desteği                       |
+| 🟡    | Bot desteği                                      |
+| ❌     | Bot kullanımı yardım kılavuzu                    |
+| ❌     | Bot için klon desteği                            |
+| ❌     | UTC zaman ayarları                               |
+| ✅     | Dil seçimleri ve dil ayarları                    |
+| ✅     | Kurallar                                         |
+| ✅     | Karşılama                                        |
+| ✅     | Anti-flood                                       |
+| ✅     | Anti-spam                                        |
+| ✅     | Uğurlama                                         |
+| ✅     | Alfabeler                                        |
+| ✅     | Captcha (1 mod)                                  |
+| ❌     | Kontrol ayarları                                 |
+| ❌     | @Admin                                           |
+| ❌     | Blok ayarları                                    |
+| ✅     | Medya blokları                                   |
+| ❌     | NSFW engelleme                                   |
+| ✅     | Uyarı ayarları                                   |
+| ❌     | Gece modu                                        |
+| ❌     | Etiket ayarları                                  |
+| ✅     | Bağlantı ayarları                                |
+| ❌     | Onay modu                                        |
+| ❌     | Mesaj silme ayarları                             |
+| ❌     | Konular ayarları                                 |
+| ❌     | Yasaklı kelimeler                                |
+| ❌     | Tekrarlayan mesajlar                             |
+| ❌     | Üye yönetimi                                     |
+| ❌     | Maskeli kullanıcı ayarları                       |
+| ❌     | Tartışma grubu ayarları                          |
+| ❌     | Kişisel komutlar                                 |
+| ❌     | Sihirli Sticker/GIF                              |
+| ❌     | Maksimum mesaj uzunluğu ayarları                 |
+| ❌     | Kayıt kanalı                                     |
+| ❌     | Personel grubu                                   |
+| ❌     | Grup istatistikleri                              |
+| ✅     | Genel komut izin düzenleyici                     |
+| ✅     | Kullanıcı verilerini gruptan temizleme (/forget) |
+| ❌     | Kullanıcı verilerini bottan temizleme            |
+| ❌     | Kullanıcı gizlilik modu                          |
+| ✅     | Kripto fiyatları (harici API)                    |
+
 *Doküman güncellenme tarihi: `$(date +%Y-%m-%d)`*
