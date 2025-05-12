@@ -8,19 +8,39 @@ function main(args) {
     GHCommand.registerCommands(["COMMAND_START"], (msg, chat, user) => {
         if (msg.chat.type !== "private") return;
 
-        const introMessage = `🌟 *Capi Group Bot'a Hoş Geldiniz!* 🌟\n\nMerhaba ${user.first_name} 👋\nBotu gruplarınıza kolayca ekleyebilir, komut kategorilerini keşfedebilir veya daha fazla bilgi alabilirsiniz.`;
+        const introMessage = `👋🏻 Merhaba ${user.first_name}!
+
+Ben 🤖 <b>Capi Group Yardımcı Botuyum</b>. Gruplarınızı kolay, güvenli ve etkili bir şekilde yönetmenize yardımcı olmak için buradayım!
+
+@GroupHelpBot gruplarınızı kolay ve güvenle yönetmenize yardımcı olması için en eksiksiz Bot!
+
+👉🏻 <b>Çalışmamı istiyorsan beni bir <u>supergroup</u>'a ekle ve <u>yönetici</u> olarak ayarla!</b>
+
+🛠️ <b>Yapabileceklerim:</b>
+• Yönetici araçları
+• Üye kontrol sistemleri
+• Cezalandırma ve güvenlik komutları
+• Yardım ve bilgi hizmetleri
+
+❓ <b>Komutları merak mı ediyorsun?</b>
+Tüm komutları ve nasıl çalıştıklarını görmek için <b>/help</b> tuşuna bas ya da aşağıdaki "Komutlar" menüsünü kullan!
+
+📌 Aşağıdan menüyü kullanarak bölümleri keşfet!`;
 
         GHbot.sendMessage(user.id, user.id, introMessage, {
-            parse_mode: "Markdown",
+            parse_mode: "HTML",
             link_preview_options: JSON.stringify({ is_disabled: true }),
             reply_markup: {
                 inline_keyboard: [
                     [
-                        { text: "➕ Gruba Ekle", url: `https://t.me/${TGbot.me.username}?startgroup=true&admin=change_info+delete_messages+restrict_members+invite_users+pin_messages+promote_members+manage_video_chats+manage_chat` }
+                        {
+                            text: "➕ Gruba Ekle",
+                            url: `https://t.me/${TGbot.me.username}?startgroup=true&admin=change_info+delete_messages+restrict_members+invite_users+pin_messages+promote_members+manage_video_chats+manage_chat`
+                        }
                     ],
                     [
                         { text: "📋 Komutlar", callback_data: "MENU_COMMANDS" },
-                        { text: "ℹ️ Bilgiler", callback_data: "MENU_INFO" }
+                        { text: "ℹ️ Bilgiler", callback_data: "BOT_INFO" }
                     ],
                     [
                         { text: "📢 Kanalımız", url: "https://t.me/capiyedek_support" }
@@ -32,76 +52,165 @@ function main(args) {
 
     GHbot.onCallback(async (cb, chat, user) => {
         if (chat.isGroup) return;
+
         const msg = cb.message;
-        const backButton = [{ text: "⬅️ Geri", callback_data: "MENU" }];
+        const backToMenuButton = [{ text: "⬅️ Ana Menü", callback_data: "MENU" }];
+        const backToCommandsButton = [{ text: "⬅️ Komutlara Geri Dön", callback_data: "MENU_COMMANDS" }];
 
-        // Bot version and developer info
-        if (cb.data === "MENU_INFO") {
-            const infoText = `🤖 *Bot Versiyonu:* v${global.LGHVersion || "1.0.0"}\n👨‍💻 *Geliştirici:* byblackcapi`;
-            GHbot.editMessageText(user.id, infoText, {
-                message_id: msg.message_id,
-                chat_id: chat.id,
-                parse_mode: "Markdown",
-                reply_markup: { inline_keyboard: [backButton] }
-            });
-            return GHbot.answerCallbackQuery(user.id, cb.id);
-        }
-
-        // Category definitions
-        const categories = {
-            CATEGORY_GENERAL: { title: "⚙️ *Genel Komutlar*", listText: `\n/settings - Grup ayarlarını açar.\n/rules - Grup kurallarını gösterir.\n/perms - Kullanıcının bot izinlerini gösterir.\n/staff - Grup yetkililerini listeler.\n/info - Kullanıcı bilgilerini gösterir/düzenler.\n/me - Kendi bilgilerinizi gösterir.\n/pin - Mesaj sabitler.\n/geturl - Yanıtlanan mesaja bağlantı verir.` },
-            CATEGORY_HELP: { title: "📚 *Yardım Komutları*", listText: `\n/help - Yardım menüsü bağlantısını gönderir.\n/commands - Tüm komutlara bağlantı verir.\n/support - Destek ile iletişim kurar.` },
-            CATEGORY_PUNISHMENT: { title: "🚫 *Cezalandırma Komutları*", listText: `\n/del - Mesaj siler.\n/warn - Uyarı verir.\n/unwarn - Uyarıyı kaldırır.\n/delwarn - Uyarı verir ve mesajı siler.\n/kick - Kullanıcıyı atar.\n/delkick - Atar ve mesajı siler.\n/mute - Susturur.\n/unmute - Susturmayı kaldırır.\n/delmute - Susturur ve mesajı siler.\n/ban - Kalıcı ban atar.\n/unban - Ban kaldırır.\n/delban - Ban atar ve mesajı siler.` },
-            CATEGORY_ROLES: { title: "🛡️ *Rol Yönetimi Komutları*", listText: `\n/free - Serbest rolü verir.\n/unfree - Serbest rolünü alır.\n/helper - Yardımcı rolü verir.\n/unhelper - Yardımcı rolünü alır.\n/cleaner - Temizleyici rolü verir.\n/uncleaner - Temizleyici rolünü alır.\n/muter - Susturucu rolü verir.\n/unmuter - Susturucu rolünü alır.\n/mod - Moderatör rolü verir.\n/unmod - Moderatör rolünü alır.\n/cofounder - Kurucu ortağı yapar.\n/uncofounder - Kurucu ortağı kaldırır.` },
-            CATEGORY_ADMIN: { title: "👮 *Yönetici Komutları*", listText: `\n/admin - Yönetici yapar.\n/unadmin - Yönetici yetkisini kaldırır.\n/title - Grup unvanı verir.\n/untitle - Grup unvanını kaldırır.` },
-            CATEGORY_PRIVACY: { title: "🔒 *Gizlilik Komutları*", listText: `\n/forgot - Kullanıcı verilerini siler.` }
+        const commandCategories = {
+            CATEGORY_GENERAL: {
+                title: "⚙️ Genel Komutlar",
+                description: "<b>⚙️ Genel komutlar</b> grubun ayarlarını ve kullanıcı bilgilerini görüntülemenizi sağlar.",
+                commands: [
+                    "/settings - Grup ayarlarını açar.",
+                    "/rules - Grup kurallarını gösterir.",
+                    "/perms - Kullanıcının izinlerini gösterir.",
+                    "/staff - Yetkili listesini gösterir.",
+                    "/info - Kullanıcı bilgilerini gösterir.",
+                    "/me - Kendi bilgilerinizi gösterir.",
+                    "/pin - Mesaj sabitler.",
+                    "/geturl - Mesaja ait bağlantıyı verir."
+                ]
+            },
+            CATEGORY_HELP: {
+                title: "📚 Yardım Komutları",
+                description: "<b>📚 Yardım komutları</b> bot hakkında yardım ve destek sağlar.",
+                commands: [
+                    "/help - Yardım menüsünü açar.",
+                    "/commands - Komut listesini gösterir.",
+                    "/support - Destek ile iletişime geç."
+                ]
+            },
+            CATEGORY_PUNISHMENT: {
+                title: "🚫 Cezalandırma Komutları",
+                description: "<b>🚫 Cezalandırma komutları</b> grup içi düzeni sağlamak için kullanılır.",
+                commands: [
+                    "/del - Mesaj siler.",
+                    "/warn - Kullanıcıyı uyarır.",
+                    "/unwarn - Uyarıyı kaldırır.",
+                    "/delwarn - Uyarır ve mesajı siler.",
+                    "/kick - Kullanıcıyı atar.",
+                    "/mute - Susturur.",
+                    "/ban - Banlar."
+                ]
+            }
         };
 
-        // Handle showing categories menu
-        if (cb.data === "MENU_COMMANDS") {
-            const keyboard = [
-                [ { text: "⚙️ Genel", callback_data: "CATEGORY_GENERAL" }, { text: "📚 Yardım", callback_data: "CATEGORY_HELP" } ],
-                [ { text: "🚫 Cezalandırma", callback_data: "CATEGORY_PUNISHMENT" }, { text: "🛡️ Roller", callback_data: "CATEGORY_ROLES" } ],
-                [ { text: "👮 Yönetici", callback_data: "CATEGORY_ADMIN" }, { text: "🔒 Gizlilik", callback_data: "CATEGORY_PRIVACY" } ],
-                backButton
-            ];
-            GHbot.editMessageText(user.id, "📋 *Komut Kategorileri*\n\nBir kategori seçerek ilgili komutları görebilirsin:", {
-                message_id: msg.message_id,
-                chat_id: chat.id,
-                parse_mode: "Markdown",
-                reply_markup: { inline_keyboard: keyboard }
-            });
-            return GHbot.answerCallbackQuery(user.id, cb.id);
-        }
-
-        // Handle showing specific category commands
         if (cb.data.startsWith("CATEGORY_")) {
-            const cat = categories[cb.data];
-            const text = `${cat.title}\nKomutlar:${cat.listText}`;
-            GHbot.editMessageText(user.id, text, {
+            const category = commandCategories[cb.data];
+            const commandText = `${category.title}
+
+${category.description}
+
+<b>Komutlar:</b>
+${category.commands.map(cmd => `🔹 ${cmd}`).join("\n")}`;
+
+            GHbot.editMessageText(user.id, commandText, {
                 message_id: msg.message_id,
                 chat_id: chat.id,
-                parse_mode: "Markdown",
-                reply_markup: { inline_keyboard: [backButton] }
+                parse_mode: "HTML",
+                reply_markup: { inline_keyboard: [backToCommandsButton] }
             });
+
             return GHbot.answerCallbackQuery(user.id, cb.id);
         }
 
-        // Return to start menu
         if (cb.data === "MENU") {
-            const introMessage = `🌟 *Capi Group Bot'a Hoş Geldiniz!* 🌟\n\nMerhaba ${user.first_name} 👋\nBotu gruplarınıza kolayca ekleyebilir, komut kategorilerini keşfedebilir veya daha fazla bilgi alabilirsiniz.`;
+            const introMessage = `👋🏻 Merhaba ${user.first_name}!
+
+Ben 🤖 <b>Capi Group Yardımcı Botuyum</b>. Gruplarınızı kolay, güvenli ve etkili bir şekilde yönetmenize yardımcı olmak için buradayım!
+
+@GroupHelpBot gruplarınızı kolay ve güvenle yönetmenize yardımcı olması için en eksiksiz Bot!
+
+👉🏻 <b>Çalışmamı istiyorsan beni bir <u>supergroup</u>'a ekle ve <u>yönetici</u> olarak ayarla!</b>
+
+🛠️ <b>Yapabileceklerim:</b>
+• Yönetici araçları
+• Üye kontrol sistemleri
+• Cezalandırma ve güvenlik komutları
+• Yardım ve bilgi hizmetleri
+
+❓ <b>Komutları merak mı ediyorsun?</b>
+Tüm komutları ve nasıl çalıştıklarını görmek için <b>/help</b> tuşuna bas ya da aşağıdaki "Komutlar" menüsünü kullan!
+
+📌 Aşağıdan menüyü kullanarak bölümleri keşfet!`;
+
             GHbot.editMessageText(user.id, introMessage, {
                 message_id: msg.message_id,
                 chat_id: chat.id,
-                parse_mode: "Markdown",
+                parse_mode: "HTML",
                 reply_markup: {
                     inline_keyboard: [
-                        [ { text: "➕ Gruba Ekle", url: `https://t.me/${TGbot.me.username}?startgroup=true&admin=change_info+delete_messages+restrict_members+invite_users+pin_messages+promote_members+manage_video_chats+manage_chat` } ],
-                        [ { text: "📋 Komutlar", callback_data: "MENU_COMMANDS" }, { text: "ℹ️ Bilgiler", callback_data: "MENU_INFO" } ],
-                        [ { text: "📢 Kanalımız", url: "https://t.me/capiyedek_support" } ]
+                        [
+                            {
+                                text: "➕ Gruba Ekle",
+                                url: `https://t.me/${TGbot.me.username}?startgroup=true&admin=change_info+delete_messages+restrict_members+invite_users+pin_messages+promote_members+manage_video_chats+manage_chat`
+                            }
+                        ],
+                        [
+                            { text: "📋 Komutlar", callback_data: "MENU_COMMANDS" },
+                            { text: "ℹ️ Bilgiler", callback_data: "BOT_INFO" }
+                        ],
+                        [
+                            { text: "📢 Kanalımız", url: "https://t.me/capiyedek_support" }
+                        ]
                     ]
                 }
             });
+
+            return GHbot.answerCallbackQuery(user.id, cb.id);
+        }
+
+        if (cb.data === "MENU_COMMANDS") {
+            const menu = `📋 <b>Komutlar Kategorisi</b>
+
+Lütfen aşağıdan bir kategori seçin:`;
+            GHbot.editMessageText(user.id, menu, {
+                message_id: msg.message_id,
+                chat_id: chat.id,
+                parse_mode: "HTML",
+                reply_markup: {
+                    inline_keyboard: [
+                        [
+                            { text: "⚙️ Genel", callback_data: "CATEGORY_GENERAL" },
+                            { text: "📚 Yardım", callback_data: "CATEGORY_HELP" }
+                        ],
+                        [
+                            { text: "🚫 Cezalandırma", callback_data: "CATEGORY_PUNISHMENT" }
+                        ],
+                        backToMenuButton
+                    ]
+                }
+            });
+
+            return GHbot.answerCallbackQuery(user.id, cb.id);
+        }
+
+        if (cb.data === "BOT_INFO") {
+            const info = `🤖 <b>Capi Group Yardımcı Bot</b>
+
+Bu bot <b>Node.js</b> kullanılarak geliştirilmiştir. Amacı, Telegram gruplarının yönetimini kolaylaştırmak ve yöneticilere otomatik araçlar sunmaktır.
+
+🔧 <b>Sürüm:</b> 1.0.0
+👨‍💻 <b>Geliştirici:</b> Mr.Capi
+📅 <b>Başlangıç Tarihi:</b> 2024
+📌 <b>Özellikler:</b>
+• Komut temelli yönetim
+• Cezalandırma sistemleri
+• Yardımcı menüler ve kullanıcı arayüzü
+
+🗣️ <i>Botun gelişimine katkıda bulunan herkese teşekkür ederiz!</i>
+
+📣 Kanal: @capiyedek_support
+📃 Gizlilik Politikası yakında eklenecektir.`;
+
+            GHbot.editMessageText(user.id, info, {
+                message_id: msg.message_id,
+                chat_id: chat.id,
+                parse_mode: "HTML",
+                reply_markup: { inline_keyboard: [backToMenuButton] }
+            });
+
             return GHbot.answerCallbackQuery(user.id, cb.id);
         }
     });
