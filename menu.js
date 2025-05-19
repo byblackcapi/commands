@@ -12,7 +12,7 @@ function main(args) {
 
 Ben 🤖 <b>Capi Group Yardımcı Botuyum</b>. Gruplarınızı kolay, güvenli ve etkili bir şekilde yönetmenize yardımcı olmak için buradayım!
 
-@GroupHelpBot gruplarınızı kolay ve güvenle yönetmenize yardımcı olması için en eksiksiz Bot!
+@CapiGroupHelpBot gruplarınızı kolay ve güvenle yönetmenize yardımcı olması için en eksiksiz Bot!
 
 👉🏻 <b>Çalışmamı istiyorsan beni bir <u>supergroup</u>'a ekle ve <u>yönetici</u> olarak ayarla!</b>
 
