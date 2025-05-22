@@ -1,91 +1,206 @@
-# Capi Help Bot Komutları
-
-Bu doküman, Capi Help Bot'un tüm komutlarını kategorik olarak listeler.
-
----
-
-## Genel Komutlar
-
-| Komut       | Açıklama                                                                | Kod                | Not    |
-| ----------- | ----------------------------------------------------------------------- | ------------------ | ------ |
-| `/settings` | Grup ayarlarını açar.                                                   | `COMMAND_SETTINGS` |        |
-| `/rules`    | Grup kurallarını gösterir.                                              | `COMMAND_RULES`    | İzinli |
-| `/perms`    | Bir kullanıcının bot izinlerini gösterir.                               | `COMMAND_PERMS`    | İzinli |
-| `/staff`    | Varsayılan ve özel rollerle grup yetkililerini gösterir.                | `COMMAND_STAFF`    | İzinli |
-| `/info`     | Bir grup kullanıcısının bilgilerini gösterir ve düzenlemeye izin verir. | `COMMAND_INFO`     | İzinli |
-| `/me`       | Kendi bilgilerinizi gösterir.                                           | `COMMAND_ME`       | İzinli |
-| `/pin`      | Bir mesajı bildirimli veya bildirimsiz olarak sabitler.                 | `COMMAND_PIN`      | İzinli |
-| `/geturl`   | Bir mesaja yanıt vererek doğrudan bağlantı alır.                        | `COMMAND_GETURL`   | İzinli |
+# 🤖 CapiGroupHelpBot & 📁 CapiDB  
+[![Telegram](https://img.shields.io/badge/Telegram-CapiGroupHelpBot-blue?logo=telegram)](https://t.me/capiyedek)
+[![Support Channel](https://img.shields.io/badge/Support-Capiyedek_Support-blueviolet?logo=telegram)](https://t.me/capiyedek_support)
+[![GitHub](https://img.shields.io/badge/GitHub-byblackcapi-black?logo=github)](https://github.com/byblackcapi)
 
 ---
 
-## Yardım Komutları
+## 🚀 Proje Hakkında
 
-| Komut       | Açıklama                                     | Kod                | Not             |
-| ----------- | -------------------------------------------- | ------------------ | --------------- |
-| `/help`     | CapiGroupHelp Wiki bağlantısını gösterir.    | `COMMAND_HELP`     | Özel mesajlarda |
-| `/commands` | Bot komutlarını gösteren bir bağlantı sunar. | `COMMAND_COMMANDS` | Özel mesajlarda |
-| `/support`  | Bot desteğiyle iletişime geçer.              | `COMMAND_SUPPORT`  | Özel mesajlarda |
+**CapiGroupHelpBot**, Telegram grupları için geliştirilmiş, özelleştirilebilir ve modüler bir yönetim botudur.  
+Bot, grup yönetimi, kullanıcı rolleri, ceza sistemi, mesaj araçları ve gizlilik kontrolleri gibi birçok özelliği destekler.
 
----
-
-## Cezalandırma Komutları
-
-| Komut      | Açıklama                                                         | Kod               |
-| ---------- | ---------------------------------------------------------------- | ----------------- |
-| `/del`     | Bir mesajı siler.                                                | `COMMAND_DELETE`  |
-| `/warn`    | Bir kullanıcıyı uyarır ve uyarı limiti aşıldığında cezalandırır. | `COMMAND_WARN`    |
-| `/unwarn`  | Bir kullanıcının uyarısını kaldırır.                             | `COMMAND_UNWARN`  |
-| `/delwarn` | Kullanıcıyı uyarır ve mesajı siler.                              | `COMMAND_DELWARN` |
-| `/kick`    | Bir kullanıcıyı gruptan atar.                                    | `COMMAND_KICK`    |
-| `/delkick` | Kullanıcıyı atar ve mesajını siler.                              | `COMMAND_DELKICK` |
-| `/mute`    | Kullanıcının mesajlaşmasını devre dışı bırakır.                  | `COMMAND_MUTE`    |
-| `/unmute`  | Kullanıcının mesajlaşmasını yeniden etkinleştirir.               | `COMMAND_UNMUTE`  |
-| `/delmute` | Kullanıcıyı susturur ve mesajını siler.                          | `COMMAND_DELMUTE` |
-| `/ban`     | Kullanıcıyı kalıcı olarak gruptan çıkarır.                       | `COMMAND_BAN`     |
-| `/unban`   | Kullanıcının banını kaldırır.                                    | `COMMAND_UNBAN`   |
-| `/delban`  | Kullanıcıyı banlar ve mesajını siler.                            | `COMMAND_DELBAN`  |
+Veri yönetimi için bağımsız bir sistem olan **CapiDB** kullanılmaktadır. Bu sistem tamamen dosya tabanlı ve modüler yapıda çalışır.
 
 ---
 
-## Rol Yönetimi Komutları
+## 🤖 Bot Projesi: CapiGroupHelpBot
 
-| Komut          | Açıklama                                | Kod                   |
-| -------------- | --------------------------------------- | --------------------- |
-| `/free`        | Kullanıcıya serbest rolünü verir.       | `COMMAND_FREE`        |
-| `/unfree`      | Kullanıcıdan serbest rolünü alır.       | `COMMAND_UNFREE`      |
-| `/helper`      | Kullanıcıya yardımcı rolünü verir.      | `COMMAND_HELPER`      |
-| `/unhelper`    | Kullanıcıdan yardımcı rolünü alır.      | `COMMAND_UNHELPER`    |
-| `/cleaner`     | Kullanıcıya temizleyici rolünü verir.   | `COMMAND_CLEANER`     |
-| `/uncleaner`   | Kullanıcıdan temizleyici rolünü alır.   | `COMMAND_UNCLEANER`   |
-| `/muter`       | Kullanıcıya susturucu rolünü verir.     | `COMMAND_MUTER`       |
-| `/unmuter`     | Kullanıcıdan susturucu rolünü alır.     | `COMMAND_UNMUTER`     |
-| `/mod`         | Kullanıcıya moderatör rolünü verir.     | `COMMAND_MODERATOR`   |
-| `/unmod`       | Kullanıcıdan moderatör rolünü alır.     | `COMMAND_UNMODERATOR` |
-| `/cofounder`   | Kullanıcıya kurucu ortağı rolünü verir. | `COMMAND_COFOUNDER`   |
-| `/uncofounder` | Kullanıcıdan kurucu ortağı rolünü alır. | `COMMAND_UNCOFOUNDER` |
+### 📌 Temel Bilgiler
+- **Bot Adı:** `CapiGroupHelpBot`
+- **Yapımcı:** `Capi`
+- **GitHub:** [github.com/byblackcapi](https://github.com/byblackcapi)
+- **Telegram:** [t.me/capiyedek](https://t.me/capiyedek)
+- **Destek Kanalı:** [t.me/capiyedek_support](https://t.me/capiyedek_support)
 
 ---
 
-## Yönetici Komutları
-
-| Komut      | Açıklama                              | Kod                       |
-| ---------- | ------------------------------------- | ------------------------- |
-| `/admin`   | Kullanıcıya yönetici yetkisi verir.   | `COMMAND_ADMINISTRATOR`   |
-| `/unadmin` | Kullanıcının yönetici yetkisini alır. | `COMMAND_UNADMINISTRATOR` |
-| `/title`   | Bir yöneticiye grup unvanı verir.     | `COMMAND_TITLE`           |
-| `/untitle` | Yöneticiden grup unvanını kaldırır.   | `COMMAND_UNTITLE`         |
-
----
-
-## Gizlilik Komutları
-
-| Komut     | Açıklama                                            | Kod              |
-| --------- | --------------------------------------------------- | ---------------- |
-| `/forgot` | Bir kullanıcıya ait tüm verileri grubunuzdan siler. | `COMMAND_FORGOT` |
+### ⚙️ Özellikler
+- Grup ayarlarını yönetme
+- Kullanıcı izinlerini ve rollerini düzenleme
+- Sabitleme, uyarı, ban gibi yönetimsel işlemler
+- Yetkili rolleri verme/alma
+- Kullanıcı verilerini temizleme
+- Komutların tamamı ayrı `.py` dosyalarında yönetilir
 
 ---
 
+### 🧾 Komut Kategorileri
+
+#### 📂 Genel Komutlar
+| Komut | Açıklama |
+|-------|----------|
+| `/settings` | Grup ayarlarını gösterir |
+| `/rules` | Grup kurallarını gösterir |
+| `/perms` | Kullanıcının bot izinlerini gösterir |
+| `/staff` | Yetkili kullanıcıları listeler |
+| `/info` | Kullanıcı bilgilerini gösterir |
+| `/me` | Kendi bilgilerinizi gösterir |
+| `/pin` | Mesaj sabitleme (bildirimli/bildirimsiz) |
+| `/geturl` | Mesaj bağlantısını getirir |
+
+#### ❓ Yardım Komutları
+| Komut | Açıklama |
+|-------|----------|
+| `/help` | Yardım bağlantısını verir |
+| `/commands` | Komut listesini gösterir |
+| `/support` | Destek kanalına yönlendirir |
+
+#### 🚫 Ceza Komutları
+| Komut | Açıklama |
+|-------|----------|
+| `/del` | Mesaj siler |
+| `/warn` | Kullanıcıyı uyarır |
+| `/unwarn` | Uyarı kaldırır |
+| `/delwarn` | Uyarı + Mesaj silme |
+| `/kick` | Kullanıcıyı atar |
+| `/delkick` | Atar + Mesaj siler |
+| `/mute` | Susturur |
+| `/unmute` | Susturmayı kaldırır |
+| `/delmute` | Susturur + Mesaj siler |
+| `/ban` | Kalıcı ban |
+| `/unban` | Ban kaldırma |
+| `/delban` | Ban + Mesaj silme |
+
+#### 🛡️ Rol Yönetimi
+| Komut | Açıklama |
+|-------|----------|
+| `/free` - `/unfree` | Serbest rolü |
+| `/helper` - `/unhelper` | Yardımcı rolü |
+| `/cleaner` - `/uncleaner` | Temizleyici rolü |
+| `/muter` - `/unmuter` | Susturucu rolü |
+| `/mod` - `/unmod` | Moderatör rolü |
+| `/cofounder` - `/uncofounder` | Kurucu ortağı rolü |
+
+#### 👮 Yönetici Komutları
+| Komut | Açıklama |
+|-------|----------|
+| `/admin` - `/unadmin` | Yönetici yetkisi ver/al |
+| `/title` - `/untitle` | Grup unvanı ver/al |
+
+#### 🔒 Gizlilik Komutu
+| Komut | Açıklama |
+|-------|----------|
+| `/forgot` | Kullanıcı verisini temizler |
+
+---
+
+### 📁 Dosya Yapısı (Örnek)
+```
+CapiGroupHelpBot/
+├── bot.py
+├── config.py
+├── logger.py
+├── permissions.py
+├── handlers/
+│   └── dispatcher.py
+├── commands/
+│   ├── settings.py
+│   ├── rules.py
+│   ├── ...
+└── ...
+```
+
+---
+
+### 🧩 Gerekli Kütüphaneler
+
+| Kütüphane | Açıklama |
+|----------|----------|
+| `python-telegram-bot` | Telegram Bot API |
+| `loguru` | Gelişmiş loglama |
+| `asyncio` | Asenkron yapı |
+| `aiofiles` | Asenkron dosya işlemleri |
+| `json`, `re`, `typing`, `datetime` | Yardımcı Python modülleri |
+| `pydantic` (opsiyonel) | Veri doğrulama için |
+
+---
+
+## 🗂️ Veritabanı Projesi: CapiDB
+
+### 📚 Genel Özellikler
+- Modüler, dosya tabanlı veri yapısı
+- Her komut/özellik için ayrı veri dosyası
+- JSON tabanlı yapı
+- Hızlı erişim, asenkron dosya kontrolü
+- Ana index ile veri takibi
+
+### 📁 Dosya Yapısı (Örnek)
+```
+CapiDB/
+├── index.py
+├── users.py
+├── warns.py
+├── roles.py
+├── ...
+```
+
+### 🧩 Gerekli Kütüphaneler
+
+| Kütüphane | Açıklama |
+|----------|----------|
+| `json` | Veri depolama |
+| `aiofiles` | Asenkron dosya kontrolü |
+| `os` | Dosya sistemi işlemleri |
+| `datetime`, `typing` | Yardımcı modüller |
+| `asyncio` | Performans için |
+
+---
+
+## ⚙️ Kurulum
+
+1. Reponuzu klonlayın:
+```bash
+git clone https://github.com/byblackcapi/CapiGroupHelpBot.git
+cd CapiGroupHelpBot
+```
+
+2. Gerekli paketleri kurun:
+```bash
+pip install -r requirements.txt
+```
+
+3. `config.py` dosyasını düzenleyin.
+
+4. Botu başlatın:
+```bash
+python bot.py
+```
+
+---
+
+## 🤝 Katkı
+
+- Yeni komutlar, hata düzeltmeleri için PR gönderebilirsiniz!
+- Kodlama standartlarına ve dosya yapısına uyulması önemlidir.
+
+---
+
+## ⚖️ Lisans
+
+MIT License — Detaylar için `LICENSE` dosyasını inceleyin.
+
+---
+
+## 📞 İletişim
+
+- Telegram: [@capiyedek](https://t.me/capiyedek)
+- Destek Kanalı: [@capiyedek_support](https://t.me/capiyedek_support)
+
+---
+
+**CapiGroupHelpBot & CapiDB**  
+Yapımcı: **Capi**
 ---
 
 ## Özellik Durumu
