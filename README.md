@@ -98,56 +98,77 @@ Veri yönetimi için bağımsız bir sistem olan **CapiDB** kullanılmaktadır. 
 ### 📁 Dosya Yapısı (Örnek)
 ```
 CapiGroupHelpBot/
-├── bot.py
-├── config.py
-├── logger.py
-├── permissions.py
-├── utils.py
+├── bot.py                         # Ana giriş noktası
+├── config.py                      # Ayarlar, token vs.
+├── logger.py                      # Loglama sistemi
+├── permissions.py                 # Yetki denetimi
+├── utils/
+│   ├── helpers.py                 # Yardımcı genel fonksiyonlar
+│   ├── texts.py                   # Sabit metinler
+│   ├── decorators.py              # Komut yetkilendirme, loglama vb.
+│   └── language.py                # Çoklu dil desteği (isteğe bağlı)
+
 ├── handlers/
-│   └── dispatcher.py
-└── commands/
-    ├── settings.py
-    ├── rules.py
-    ├── perms.py
-    ├── staff.py
-    ├── info.py
-    ├── me.py
-    ├── pin.py
-    ├── geturl.py
-    ├── help.py
-    ├── commands.py
-    ├── support.py
-    ├── del.py
-    ├── warn.py
-    ├── unwarn.py
-    ├── delwarn.py
-    ├── kick.py
-    ├── delkick.py
-    ├── mute.py
-    ├── unmute.py
-    ├── delmute.py
-    ├── ban.py
-    ├── unban.py
-    ├── delban.py
-    ├── free.py
-    ├── unfree.py
-    ├── helper.py
-    ├── unhelper.py
-    ├── cleaner.py
-    ├── uncleaner.py
-    ├── muter.py
-    ├── unmuter.py
-    ├── mod.py
-    ├── unmod.py
-    ├── cofounder.py
-    ├── uncofounder.py
-    ├── admin.py
-    ├── unadmin.py
-    ├── title.py
-    ├── untitle.py
-    └── forgot.py
-│   ├── ...
-└── ...
+│   ├── dispatcher.py              # Komut yönlendirici
+│   ├── join_handler.py            # Gruba katılım
+│   ├── leave_handler.py           # Gruptan çıkış
+│   └── error_handler.py           # Hata yönetimi
+
+├── database/                      # CapiDB bağlantı arayüzleri
+│   ├── index.py                   # Ana kontrol
+│   ├── users.py
+│   ├── warns.py
+│   ├── roles.py
+│   └── ...                        # Diğer veri modülleri
+
+├── modules/                       # Mantıksal modül grupları
+│   ├── general/
+│   │   ├── settings.py
+│   │   ├── rules.py
+│   │   ├── perms.py
+│   │   ├── info.py
+│   │   ├── me.py
+│   │   ├── staff.py
+│   │   ├── pin.py
+│   │   ├── geturl.py
+│   │   └── forgot.py
+│   │
+│   ├── help/
+│   │   ├── help.py
+│   │   ├── commands.py
+│   │   └── support.py
+│   │
+│   ├── punishments/
+│   │   ├── del.py
+│   │   ├── warn.py
+│   │   ├── unwarn.py
+│   │   ├── delwarn.py
+│   │   ├── kick.py
+│   │   ├── delkick.py
+│   │   ├── mute.py
+│   │   ├── unmute.py
+│   │   ├── delmute.py
+│   │   ├── ban.py
+│   │   ├── unban.py
+│   │   └── delban.py
+│   │
+│   ├── roles/
+│   │   ├── free.py        ├── unfree.py
+│   │   ├── helper.py      ├── unhelper.py
+│   │   ├── cleaner.py     ├── uncleaner.py
+│   │   ├── muter.py       ├── unmuter.py
+│   │   ├── mod.py         ├── unmod.py
+│   │   ├── cofounder.py   ├── uncofounder.py
+│   │
+│   └── admin/
+│       ├── admin.py
+│       ├── unadmin.py
+│       ├── title.py
+│       └── untitle.py
+
+├── requirements.txt               # Gerekli paketler
+├── README.md                      # Açıklama dosyası
+└── LICENSE                        # Lisans
 ```
 
 ---
@@ -177,11 +198,40 @@ CapiGroupHelpBot/
 ### 📁 Dosya Yapısı (Örnek)
 ```
 CapiDB/
-├── index.py
-├── users.py
-├── warns.py
-├── roles.py
-├── ...
+├── index.py                     # Ana giriş ve yönlendirici dosya
+├── config.py                    # Veritabanı ayarları (klasör yolu, disk konumu vs.)
+├── logger.py                    # Loglama sistemi
+├── schema/                      # Veri şemaları ve yapı tanımları
+│   ├── user_schema.py
+│   ├── warn_schema.py
+│   ├── role_schema.py
+│   └── ...                      # Diğer veri türleri için
+│
+├── core/                        # Temel dosya işlemleri
+│   ├── file_manager.py          # Dosya okuma/yazma/kontrol
+│   ├── data_validator.py        # Giriş verisi kontrol ve doğrulama
+│   ├── cache.py                 # Opsiyonel: bellek içi geçici veri yönetimi
+│   └── utils.py                 # Yardımcı fonksiyonlar
+│
+├── modules/                     # Her bir bot özelliği için veri modülleri
+│   ├── users.py                 # Kullanıcı verileri
+│   ├── warns.py                 # Uyarılar
+│   ├── roles.py                 # Rol kayıtları
+│   ├── bans.py                  # Ban geçmişi
+│   ├── settings.py              # Grup bazlı ayarlar
+│   └── ...                      # Gereken diğer modüller
+│
+├── backups/                     # Otomatik veya manuel yedeklemeler
+│   └── YYYYMMDD_HHMM/           # Tarih bazlı klasörler
+│       └── *.json               # Yedeklenmiş dosyalar
+│
+├── tests/                       # Test dosyaları (isteğe bağlı)
+│   ├── test_users.py
+│   └── ...
+│
+├── requirements.txt             # Gerekli kütüphaneler
+├── README.md                    # Açıklamalar
+└── LICENSE                      # Lisans
 ```
 
 ### 🧩 Gerekli Kütüphaneler
