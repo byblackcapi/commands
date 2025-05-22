@@ -102,11 +102,50 @@ CapiGroupHelpBot/
 ├── config.py
 ├── logger.py
 ├── permissions.py
+├── utils.py
 ├── handlers/
 │   └── dispatcher.py
-├── commands/
-│   ├── settings.py
-│   ├── rules.py
+└── commands/
+    ├── settings.py
+    ├── rules.py
+    ├── perms.py
+    ├── staff.py
+    ├── info.py
+    ├── me.py
+    ├── pin.py
+    ├── geturl.py
+    ├── help.py
+    ├── commands.py
+    ├── support.py
+    ├── del.py
+    ├── warn.py
+    ├── unwarn.py
+    ├── delwarn.py
+    ├── kick.py
+    ├── delkick.py
+    ├── mute.py
+    ├── unmute.py
+    ├── delmute.py
+    ├── ban.py
+    ├── unban.py
+    ├── delban.py
+    ├── free.py
+    ├── unfree.py
+    ├── helper.py
+    ├── unhelper.py
+    ├── cleaner.py
+    ├── uncleaner.py
+    ├── muter.py
+    ├── unmuter.py
+    ├── mod.py
+    ├── unmod.py
+    ├── cofounder.py
+    ├── uncofounder.py
+    ├── admin.py
+    ├── unadmin.py
+    ├── title.py
+    ├── untitle.py
+    └── forgot.py
 │   ├── ...
 └── ...
 ```
