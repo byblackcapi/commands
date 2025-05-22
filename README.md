@@ -174,15 +174,87 @@ CapiGroupHelpBot/
 ---
 
 ### 🧩 Gerekli Kütüphaneler
-
-| Kütüphane | Açıklama |
-|----------|----------|
-| `python-telegram-bot` | Telegram Bot API |
-| `loguru` | Gelişmiş loglama |
-| `asyncio` | Asenkron yapı |
-| `aiofiles` | Asenkron dosya işlemleri |
-| `json`, `re`, `typing`, `datetime` | Yardımcı Python modülleri |
-| `pydantic` (opsiyonel) | Veri doğrulama için |
+ 
+  
+ 
+Kütüphane
+ 
+Versiyon
+ 
+Açıklama
+ 
+   
+ 
+`python-telegram-bot`
+ 
+`20.7`
+ 
+Telegram Bot API ile bot oluşturmak ve mesaj yönetimi sağlamak için temel kütüphane.
+ 
+ 
+ 
+`aiofiles`
+ 
+`23.2.1`
+ 
+Dosya işlemlerini asenkron şekilde yapmayı sağlayan kütüphane. Performans için önemlidir.
+ 
+ 
+ 
+`asyncio`
+ 
+`3.4.3`
+ 
+Python’un yerleşik asenkron programlama altyapısı. Event loop yönetimi sağlar.
+ 
+ 
+ 
+`loguru`
+ 
+`0.7.2`
+ 
+Gelişmiş loglama ve hata izleme. Kolay kullanımı ile hata ayıklamada büyük kolaylık sağlar.
+ 
+ 
+ 
+`pydantic`
+ 
+`2.7.1`
+ 
+(Opsiyonel) Veri doğrulama ve veri modelleri oluşturmak için güçlü bir yapı sağlar.
+ 
+ 
+ 
+`python-dotenv`
+ 
+`1.0.1`
+ 
+(Opsiyonel) `.env` dosyasından yapılandırma (TOKEN gibi) okumak için kullanılır.
+ 
+ 
+ 
+`ujson`
+ 
+`5.9.0`
+ 
+(Opsiyonel) Standart `json` modülüne göre çok daha hızlı JSON serileştirme işlemleri için.
+ 
+ 
+ 
+`pendulum`
+ 
+`3.0.0`
+ 
+(Opsiyonel) Tarih ve saat işlemlerinde gelişmiş kontrol, timezone desteği ile birlikte gelir.
+ 
+ 
+ 
+`typing-extensions`
+ 
+`4.12.0`
+ 
+Tip ipuçlarını (type hint) geliştirmek için kullanılır. Özellikle Python sürüm uyumluluğu için önemlidir.
+ 
 
 ---
 
